@@ -76,24 +76,54 @@ class _MyMobileBodyState extends State<MyMobileBody>
     return MaterialApp(
       home: Scaffold(
         body: Center(
-            child: AnimatedBuilder(
-                animation: _controllerMobile,
-                builder: (context, _) {
-                  return Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: const [
-                          Color(0xffD67BFF),
-                          Color(0xffFFB6D9),
-                        ],
-                        begin: _topAlignmentAnimationMobile.value,
-                        end: _bottomAlignmentAnimationMobile.value,
+          child: AnimatedBuilder(
+            animation: _controllerMobile,
+            builder: (context, _) {
+              return Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: const [
+                      Color(0xffD67BFF),
+                      Color(0xffFFB6D9),
+                    ],
+                    begin: _topAlignmentAnimationMobile.value,
+                    end: _bottomAlignmentAnimationMobile.value,
+                  ),
+                ),
+                child: Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            repeat: ImageRepeat.repeat,
+                            image: AssetImage('assets/images/pattern1.png'),
+                          ),
+                        ),
                       ),
-                    ),
-                  );
-                })),
+                      Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              'برنامه ریز درسی',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 50,
+                                fontFamily: 'NB',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

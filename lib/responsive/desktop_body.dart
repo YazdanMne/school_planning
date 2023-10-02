@@ -92,6 +92,34 @@ class _MyDesktopBodyState extends State<MyDesktopBody>
                     end: _bottomAlignmentAnimationDesktop.value,
                   ),
                 ),
+                child: Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            repeat: ImageRepeat.repeat,
+                            image: AssetImage('assets/images/pattern1.png'),
+                          ),
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              'برنامه ریز درسی',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 50,
+                                fontFamily: 'NB',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               );
             },
           ),
