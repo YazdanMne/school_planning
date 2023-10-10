@@ -34,7 +34,10 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+
   cupertino_icons: ^1.0.2
+  provider: ^6.0.5
+  # shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +94,18 @@ flutter:
     - family: NR
       fonts:
         - asset: assets/fonts/Nishan-Regular.otf
+
+    - family: SHB
+      fonts:
+        - asset: assets/fonts/shabnam_bold.ttf
+
+    - family: SHL
+      fonts:
+        - asset: assets/fonts/shabnam_light.ttf
+
+    - family: SHM
+      fonts:
+        - asset: assets/fonts/shabnam_medium.ttf
 
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
