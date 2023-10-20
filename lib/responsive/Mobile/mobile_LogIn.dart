@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:school_planning/responsive/Mobile/home_page.dart';
 
 class MobileLogIn extends StatefulWidget {
-  const MobileLogIn({super.key});
+  const MobileLogIn({Key? key});
 
   @override
   State<MobileLogIn> createState() => _MobileLogInState();
 }
 
-bool isButtonEnabled = false;
-final _textController = TextEditingController();
-final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
-
 class _MobileLogInState extends State<MobileLogIn> {
+  bool isTextFieldEmpty = true;
+  Color buttonColorDisabled = Color(0xffFFB6D9);
+  Color buttonColorEnabled = Color(0xffD67BFF);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,18 +40,21 @@ class _MobileLogInState extends State<MobileLogIn> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: TextFormField(
-                  onChanged: (value) {
+                  onChanged: (text) {
                     setState(() {
-                      isButtonEnabled = value.isNotEmpty;
+                      isTextFieldEmpty = text.isEmpty;
+                      buttonColorEnabled = isTextFieldEmpty
+                          ? buttonColorEnabled
+                          : buttonColorDisabled;
                     });
                   },
-                  controller: _textController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(
-                          color: Color(0xffD67BFF),
-                        )),
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide(
+                        color: Color(0xffD67BFF),
+                      ),
+                    ),
                     hintText: "نام شما",
                     hintStyle: TextStyle(
                       color: Colors.blueGrey,
@@ -62,41 +64,22 @@ class _MobileLogInState extends State<MobileLogIn> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  if (isButtonEnabled) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Mobile_HomePage(),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('HelloWorld'),
-                      ),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ).merge(
-                  ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      isButtonEnabled ? Color(0xffD67BFF) : Color(0xffFFB6D9),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  'بزن بریم',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "SHM",
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold),
-                ),
+                onPressed: isTextFieldEmpty
+                    ? () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('لطفاً نام خود را وارد کنید'),
+                          ),
+                        );
+                      }
+                    : () {
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => General_Lesson(),
+                        //   ),
+                        // );
+                      },
+                child: Text('yazdan aragh khor'),
               ),
             ],
           ),
