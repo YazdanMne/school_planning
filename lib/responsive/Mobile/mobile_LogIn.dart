@@ -1,4 +1,8 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:school_planning/responsive/Mobile/general_lesson.dart';
 
 class MobileLogIn extends StatefulWidget {
   const MobileLogIn({Key? key});
@@ -43,9 +47,9 @@ class _MobileLogInState extends State<MobileLogIn> {
                   onChanged: (text) {
                     setState(() {
                       isTextFieldEmpty = text.isEmpty;
-                      buttonColorEnabled = isTextFieldEmpty
-                          ? buttonColorEnabled
-                          : buttonColorDisabled;
+                      buttonColorDisabled = isTextFieldEmpty
+                          ? buttonColorDisabled
+                          : buttonColorEnabled;
                     });
                   },
                   decoration: InputDecoration(
@@ -59,27 +63,65 @@ class _MobileLogInState extends State<MobileLogIn> {
                     hintStyle: TextStyle(
                       color: Colors.blueGrey,
                       fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'SHM',
                     ),
                   ),
                 ),
               ),
-              ElevatedButton(
+              MaterialButton(
+                minWidth: 350,
+                height: 75,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                elevation: 10.0,
+                color:
+                    isTextFieldEmpty ? buttonColorDisabled : buttonColorEnabled,
                 onPressed: isTextFieldEmpty
                     ? () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('لطفاً نام خود را وارد کنید'),
-                          ),
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: Text('لطفا نام خود را وارد کنید'),
+                              content: Text('لطفا نام خود را وارد کنید'),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (_) => const MobileLogIn(),
+                                        ),
+                                      );
+                                      //action code for "Yes" button
+                                    },
+                                    child: Text('Yes')),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); //close Dialog
+                                  },
+                                  child: Text('Close'),
+                                )
+                              ],
+                            );
+                          },
                         );
                       }
                     : () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) => General_Lesson(),
-                        //   ),
-                        // );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => General_Lesson(),
+                          ),
+                        );
                       },
-                child: Text('yazdan aragh khor'),
+                child: Text(
+                  'بزن بریم',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 35,
+                    fontFamily: 'SHM',
+                  ),
+                ),
               ),
             ],
           ),
